@@ -4,6 +4,7 @@
 class NodeOfContacts
 {
 	friend class ListOfContacts;
+	friend ostream& operator<<(ostream& str, const ListOfContacts& myList);
 private:
 	Contacts theContact;
 	NodeOfContacts* next;

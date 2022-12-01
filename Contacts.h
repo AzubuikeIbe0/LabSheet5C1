@@ -7,6 +7,7 @@ class Contacts
 	friend class NodeOfContacts;
 	friend class ListOfContacts;
 	friend ostream& operator<<(ostream& str, const Contacts myContact);
+	friend ostream& operator<<(ostream& str, const ListOfContacts& myList);
 private:
 	string name;
 	int number;

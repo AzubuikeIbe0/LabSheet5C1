@@ -10,8 +10,8 @@ Contacts::Contacts()
 
 Contacts::Contacts(string n, int num)
 {
-	n = "John";
-	num = 88;
+	name=n;
+	number=num;
 }
 
 string Contacts::getName()

@@ -23,6 +23,9 @@ public:
 	Contacts deleteContact(string nameToDelete);
 	bool findContact(string nameToFind);
 	bool isEmpty(); // return true if list empty
-	/*ListOfContacts(const ListOfContacts* p1);*/ // Copy constructor
+	ListOfContacts(const ListOfContacts& source); // Copy constructor
+
+	ListOfContacts operator=(ListOfContacts rhs); // overloaded copy assignment =
+
 	ostream& displayList(ostream&) const;
 };

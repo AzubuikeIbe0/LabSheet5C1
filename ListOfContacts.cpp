@@ -89,7 +89,15 @@ ListOfContacts::~ListOfContacts()
 ostream& operator<<(ostream& str, const ListOfContacts& myList)
 {
 
-	str << myList.head;
+
+	NodeOfContacts* temp = myList.head;
+	while (temp != nullptr)
+	{
+		str << temp->theContact.getName() << endl;
+		temp = temp->next;
+	}
+
+
 	return str;
 
 }
@@ -99,7 +107,7 @@ bool ListOfContacts::insertBack(string s, int n)
 {
 	NodeOfContacts* newNode = new NodeOfContacts;
 	NodeOfContacts* nodePtr = head;
-	bool result;
+	//bool result;
 
 	newNode->next = nullptr;
 	newNode->theContact.name = s;
@@ -250,12 +258,74 @@ bool ListOfContacts::isEmpty()
 }
 
 
-//ListOfContacts::ListOfContacts(const ListOfContacts &p1)
+ostream& ListOfContacts::displayList(ostream& str) const
+{
+	NodeOfContacts* temp = head;
+	while (temp != nullptr)
+	{
+		str << temp->theContact.getName() << endl;
+		temp = temp->next;
+	}
+
+	return str;
+}
+
+
+//ListOfContacts & ListOfContacts::operator=(const ListOfContacts& rhs)
 //{
-//	name = p1.name;
-//	number = p1.number;
+//	if (this != &rhs) // Check for self assignment aka the lhs and rhs the same object
+//	{
+//		if (head != nullptr) // free memory of lhs
+//		{
+//			while (head)
+//				deleteBack();
+//		}//end if
 //
+//		NodeOfContacts* copyPtr = nullptr;
+//		NodeOfContacts* orgPtr = rhs.head;
+//
+//		while (orgPtr != nullptr)
+//		{
+//			if (head == nullptr)
+//			{
+//				head = copyPtr = new NodeOfContacts((orgPtr->theContact).name, (orgPtr->theContact).number);
+//			}
+//			else
+//			{
+//				copyPtr->next = new NodeOfContacts((orgPtr->theContact).name, (orgPtr->theContact).number);
+//				copyPtr = copyPtr->next;
+//			}//end if
+//
+//			orgPtr = orgPtr->next;
+//		}//end while
+//	 }// end if
+//
+//	return *this;
 //}
+
+
+
+
+ListOfContacts::ListOfContacts(const ListOfContacts& source)
+{
+	head = nullptr;
+	NodeOfContacts* newNode = source.head;
+	while (newNode != nullptr)
+	{
+		insertBack((newNode->theContact).getName(), (newNode->theContact).getNumber());
+		newNode=newNode->next;  // Simple but inefficient
+	}
+
+}
+
+// this takes advantage of move construction on the
+// passed-in parameter with pass-by-value.
+// therefore pass by value performs the copy
+ListOfContacts ListOfContacts::operator=(ListOfContacts rhs)
+{
+	std::swap(rhs.head, head); // now just swap the head of the copy for the head of the source
+	return *this; // destructor fires for rhs and cleans up all the nodes that were on this list
+}
 
 //ostream& operator<<(ostream& str, const ListOfContacts& myList)
 //{
